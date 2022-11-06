@@ -14,12 +14,12 @@ import styles from './Counter.module.css';
 export function Counter() {
   const count = useAppSelector(selectCount);
   const dispatch = useAppDispatch();
-  const [incrementAmount, setIncrementAmount] = useState('2');
+  const [incrementAmount, setIncrementAmount] = useState('');
 
   const incrementValue = Number(incrementAmount) || 0;
 
   return (
-    <div>
+    <div className="Counter">
       <div className={styles.row}>
         <button
           className={styles.button}
@@ -37,6 +37,7 @@ export function Counter() {
           +
         </button>
       </div>
+
       <div className={styles.row}>
         <input
           className={styles.textbox}
@@ -63,6 +64,7 @@ export function Counter() {
           Add If Odd
         </button>
       </div>
+      
     </div>
   );
 }
