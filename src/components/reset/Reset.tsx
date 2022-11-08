@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from './CountryListItem.module.css';
+import styles from './Reset.module.css';
 import { ICountry } from '../../store/models/CountryModel';
 
 export interface ResetProps {
@@ -9,11 +9,11 @@ export interface ResetProps {
 
 export function Reset(props: ResetProps) {
    return (
-    <div className={`Reset  ${styles.CountryListItem}   `}  >
+    <div className={`resetContainer  ${styles.Reset}   `}  >
         <button onClick={() => {
           console.info('onButtonClick');
           props.onResetButtonClick();
-        }}>Reset
+        }} className={styles.button}>Reset
         </button>
      </div>
   );

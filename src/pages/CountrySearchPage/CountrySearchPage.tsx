@@ -5,17 +5,23 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import {
   setSearchValue,
   fetchAllCountriesAsync,
-  selectCountrySearchValue, setSearchValueManually, getFilteredCountries, selectFetchAllCountriesStatus,
+  selectCountrySearchValue,
+  setSearchValueManually,
+  getFilteredCountries,
+  selectFetchAllCountriesStatus,
+  resetCountryState,
 } from '../../store/reducers/countrySlice';
-import styles from './CountryPage.module.css';
+import styles from './CountrySearchPage.module.css';
 import { CountryInput } from '../../components/countryInput/CountryInput';
 import { ICountry } from '../../store/models/CountryModel';
 import { CountryList } from '../../components/countryList/CountryList';
 import {
+  resetGUIState,
   selectCountrySearchPageItemsClicked,
   setCountryListItemClick,
   unsetCountryListItemClick,
 } from '../../store/reducers/guiSlice';
+import { Reset } from '../../components/reset/Reset';
 
 export function CountrySearchPage() {
   const searchString = useAppSelector(selectCountrySearchValue);
@@ -57,12 +63,13 @@ export function CountrySearchPage() {
       dispatch(setCountryListItemClick(country));
     }    // props.onCountryListItemLick(country);
   };
-  const onViewCountryButtonClick = (country: ICountry) => {
-    console.info('CountrySearchPage -> onViewCountryButtonClick:'
-      , '\ninputString:', country,
+  const onResetButtonClick = () => {
+    console.info('CountrySearchPage -> onResetButtonClick:',
     );
-    navigate(`/country/${country.code}`);
-    return false;
+
+    dispatch(resetCountryState());
+    dispatch(resetGUIState());
+
     // if(countryListItemsClicked[country.code]){
     //   dispatch(unsetCountryListItemClick(country));
     // }
@@ -70,13 +77,20 @@ export function CountrySearchPage() {
     //   dispatch(setCountryListItemClick(country));
     // }    // props.onCountryListItemLick(country);
   };
+  const onViewCountryButtonClick = (country: ICountry) => {
+    console.info('CountrySearchPage -> onViewCountryButtonClick:'
+      , '\ninputString:', country,
+    );
+    navigate(`/country/${country.code}`);
+    return false;
+  };
 
   console.info('CountryPage:'
     , '\nsearchString: ', searchString
     , '\nfilteredCountries: ', filteredCountries);
 
   return (
-    <div className="CountryPage">
+    <div className={`CountrySearchPage  ${styles.CountrySearchPage}   `}>
       <CountryInput onInputChange={onCountryInputChange} inputValue={searchString}></CountryInput>
       <CountryList
         onInputChange={onCountryInputChange}
@@ -85,6 +99,7 @@ export function CountrySearchPage() {
         onViewCountryButtonClick={onViewCountryButtonClick}
         itemsSelected={countryListItemsClicked}
       ></CountryList>
+      <div className={` ${styles.resetContainer} `}><Reset onResetButtonClick={onResetButtonClick}></Reset></div>
     </div>
   );
 }

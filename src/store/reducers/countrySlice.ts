@@ -44,11 +44,8 @@ export const fetchAllCountriesAsync = createAsyncThunk(
 export const searchCountryAsync = createAsyncThunk(
   'countryInput/fetchCountry',
   async (countryCode:string) => {
-    // const response = await fetchSearchString(searchString);
-    const response = await fetchCountry(countryCode);
-     console.info('countrySlice -> searchCountryAsync: ',
-       '\ncountryCode: ', countryCode,
-       '\nresponse:', response);
+     const response = await fetchCountry(countryCode);
+
     return (response as any).data;
   },
 );
@@ -69,6 +66,14 @@ export const countrySlice = createSlice({
        state.urlCode = action.payload;
       console.info('countryInputSlice -> reducers -> setCountryCodeFormURL: ',
         '\naction: ', action,
+        '\nstate: ', state);
+    },
+    resetCountryState: (state ) => {
+       // state.urlCode = action.payload;
+      state.searchValue = '';
+      state.urlCode = undefined;
+      console.info('countryInputSlice -> reducers -> resetState: ',
+        // '\naction: ', action,
         '\nstate: ', state);
     },
   },
@@ -119,7 +124,7 @@ export const countrySlice = createSlice({
   },
 });
 
-export const {setSearchValue, setCountryCodeFromURL} = countrySlice.actions;
+export const {setSearchValue, setCountryCodeFromURL, resetCountryState} = countrySlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
