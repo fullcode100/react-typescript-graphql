@@ -26,9 +26,7 @@ export function CountryInput(props: CountryInputProps) {
           value={state.inputValue || ''}
           onChange={(e) => {
             console.info('e.target.value:', e.target.value);
-            props.onInputChange(e.target.value);
-            // dispatch(setSearchValueManually(e.target.value));
-            // setCountrySearchValue(e.target.value);
+            props.onInputChange(e.target.value); 
           }}
         />
       </div>

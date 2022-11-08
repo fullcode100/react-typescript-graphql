@@ -1,7 +1,6 @@
 import React from 'react';
 
 import styles from './Reset.module.css';
-import { ICountry } from '../../store/models/CountryModel';
 
 export interface ResetProps {
     onResetButtonClick: ( ) => void;

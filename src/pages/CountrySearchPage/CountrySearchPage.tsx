@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import {
-  setSearchValue,
-  fetchAllCountriesAsync,
+   fetchAllCountriesAsync,
   selectCountrySearchValue,
   setSearchValueManually,
   getFilteredCountries,
@@ -36,59 +35,26 @@ export function CountrySearchPage() {
       dispatch(fetchAllCountriesAsync()); // Fetch countries on initial load
     }
   }
-  const [countrySearchValue, setCountrySearchValue] = useState('');
-
-  const incrementValue = countrySearchValue || searchString;
-  let inputTimeout: any;
   const onCountryInputChange = (inputString: string) => {
-    console.info('Change handler from country page:'
-      , '\ninputString:', inputString,
-    );
     dispatch(setSearchValueManually(inputString));
-    // if (inputTimeout) {
-    //   clearTimeout(inputTimeout);
-    // } else {
-    //   inputTimeout = setTimeout(() => {
-    //     // dispatch(setSearchValueManually(inputString));
-    //   }, 500);
-    // }
   };
   const onCountryListItemClick = (country: ICountry) => {
-    console.info('CountrySearchPage -> onCountryInputChange:'
-      , '\ninputString:', country,
-    );
     if (countryListItemsClicked[country.code]) {
       dispatch(unsetCountryListItemClick(country));
     } else {
       dispatch(setCountryListItemClick(country));
-    }    // props.onCountryListItemLick(country);
-  };
-  const onResetButtonClick = () => {
-    console.info('CountrySearchPage -> onResetButtonClick:',
-    );
+    }
 
+  };
+  const onResetButtonClick = () => { 
     dispatch(resetCountryState());
     dispatch(resetGUIState());
 
-    // if(countryListItemsClicked[country.code]){
-    //   dispatch(unsetCountryListItemClick(country));
-    // }
-    // else{
-    //   dispatch(setCountryListItemClick(country));
-    // }    // props.onCountryListItemLick(country);
   };
   const onViewCountryButtonClick = (country: ICountry) => {
-    console.info('CountrySearchPage -> onViewCountryButtonClick:'
-      , '\ninputString:', country,
-    );
     navigate(`/country/${country.code}`);
     return false;
   };
-
-  console.info('CountryPage:'
-    , '\nsearchString: ', searchString
-    , '\nfilteredCountries: ', filteredCountries);
-
   return (
     <div className={`CountrySearchPage  ${styles.CountrySearchPage}   `}>
       <CountryInput onInputChange={onCountryInputChange} inputValue={searchString}></CountryInput>

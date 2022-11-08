@@ -1,9 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState, AppThunk } from '../../store/store';
-import { fetchCountries, fetchCountry,  } from '../services/countryService';
+import { RootState, AppThunk } from '../store';
+import { fetchCountries, fetchCountry } from '../services/countryService';
 import {
   ICountry,
-  FetchCountriesAPIResponse,
   FetchCountriesAPIResult,
   FetchCountryAPIResult,
 } from '../models/CountryModel';
@@ -43,8 +42,8 @@ export const fetchAllCountriesAsync = createAsyncThunk(
 );
 export const searchCountryAsync = createAsyncThunk(
   'countryInput/fetchCountry',
-  async (countryCode:string) => {
-     const response = await fetchCountry(countryCode);
+  async (countryCode: string) => {
+    const response = await fetchCountry(countryCode);
 
     return (response as any).data;
   },
@@ -57,24 +56,14 @@ export const countrySlice = createSlice({
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
     setSearchValue: (state, action: PayloadAction<string>) => {
-       state.searchValue = action.payload;
-      console.info('countryInputSlice -> reducers -> setSearchValue: ',
-        '\naction: ', action,
-        '\nstate: ', state);
+      state.searchValue = action.payload;
     },
     setCountryCodeFromURL: (state, action: PayloadAction<string>) => {
-       state.urlCode = action.payload;
-      console.info('countryInputSlice -> reducers -> setCountryCodeFormURL: ',
-        '\naction: ', action,
-        '\nstate: ', state);
+      state.urlCode = action.payload;
     },
-    resetCountryState: (state ) => {
-       // state.urlCode = action.payload;
+    resetCountryState: (state) => {
       state.searchValue = '';
       state.urlCode = undefined;
-      console.info('countryInputSlice -> reducers -> resetState: ',
-        // '\naction: ', action,
-        '\nstate: ', state);
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -90,12 +79,6 @@ export const countrySlice = createSlice({
         state.fetchAllCountriesStatus = 'fetched';
         state.countries = action.payload.countries;
         state.continents = action.payload.continents;
-
-        console.info('searchAsync.fulfilled: ',
-          '\naction:', action,
-          '\npayload:', action.payload,
-          '\nstate:', state);
-
       })
       .addCase(fetchAllCountriesAsync.rejected, (state) => {
         state.fetchAllCountriesStatus = 'failed';
@@ -107,15 +90,9 @@ export const countrySlice = createSlice({
         payload: FetchCountryAPIResult
       }) => {
         state.fetchOneCountryStatus = 'fetched';
-        const countries = (state.countries)?state.countries : [];
-         countries.push( action.payload.country);
-         state.countries = countries;
-        // state.continents = action.payload.continents;
-
-        console.info('searchAsync.fulfilled: ',
-          '\naction:', action,
-          '\npayload:', action.payload,
-          '\nstate:', state);
+        const countries = (state.countries) ? state.countries : [];
+        countries.push(action.payload.country);
+        state.countries = countries;
 
       })
       .addCase(searchCountryAsync.rejected, (state) => {
@@ -163,22 +140,12 @@ export const getCountryFromURLCode = (state: RootState) => {
 export const setSearchValueManually =
   (searchString: string): AppThunk =>
     (dispatch, getState) => {
-      const currentValue = selectCountrySearchValue(getState());
-      console.info('countryInputSlice -> setSearchValueManually : ',
-        '\ndispatch: ', dispatch,
-        '\ngetState: ', getState,
-        '\ncurrentValue: ', currentValue);
-      dispatch(setSearchValue(searchString));
+       dispatch(setSearchValue(searchString));
     };
 export const setURLCodeManually =
   (countryCode: string): AppThunk =>
     (dispatch, getState) => {
-      const currentValue = selectCountrySearchValue(getState());
-      console.info('countryInputSlice -> setSearchValueManually : ',
-        '\ndispatch: ', dispatch,
-        '\ngetState: ', getState,
-        '\ncurrentValue: ', currentValue);
-      dispatch(setCountryCodeFromURL(countryCode));
+       dispatch(setCountryCodeFromURL(countryCode));
     };
 
 export default countrySlice.reducer;

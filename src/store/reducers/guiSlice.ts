@@ -1,8 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState, AppThunk } from '../../store/store';
-import { fetchCountries, fetchSearchString } from '../services/countryService';
-import { ICountry, FetchCountriesAPIResponse, FetchCountriesAPIResult } from '../models/CountryModel';
-import { Continent } from '../models/ContinentModel';
+import { RootState } from '../../store/store';
+import { fetchCountries } from '../services/countryService';
+import { ICountry } from '../models/CountryModel';
 
 export interface CountrySearchPageGUI {
   loading?: boolean;

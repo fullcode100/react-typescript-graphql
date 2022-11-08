@@ -9,8 +9,6 @@ export interface CountryProps {
 }
 
 export function Country(props: CountryProps) {
- 
-
    return (
     <div className={`Country  ${styles.CountryListItem}  `}  >
       <h1>{props.country.name} ({props.country.code})</h1>
