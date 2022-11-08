@@ -5,7 +5,7 @@ import { Intro } from './components/intro/Intro';
 import { Route, Routes } from "react-router-dom"
 import './App.css';
 import { CountryInput } from './components/countryInput/CountryInput';
-import { CountryPage } from './pages/CountryPage';
+import { CountrySearchPage } from './pages/CountrySearchPage';
 
 function App() {
   return (
@@ -14,9 +14,9 @@ function App() {
       <section className="App-mainContent">
         {/*<Intro  />*/}
         <Routes>
-          <Route path="/" element={<CountryPage />} />
+          <Route path="/" element={<CountrySearchPage />} />
           <Route path="/intro" element={<Intro />} />
-          <Route path="/country" element={<CountryPage />} />
+          <Route path="/country" element={<CountrySearchPage />} />
         </Routes>
       </section>
     </div>

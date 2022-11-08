@@ -1,11 +1,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import counterReducer from '../components/counter/counterSlice';
 import countryReducer from './reducers/countrySlice';
+import guiReducer from './reducers/guiSlice';
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     country: countryReducer,
+    gui: guiReducer,
   },
 });
 

@@ -1,15 +1,22 @@
-.CountryList{
-         flex-direction: row;
+.CountryList {
+    flex-direction: row;
     max-width: 100%;
     flex-wrap: wrap;
+    padding-top: 10px;
 }
+
+.CountryListItem.isSelected {
+    background-color: rgba(63, 44, 13, 0.5);
+}
+
 @media (max-width: 700px) {
-    .CountryListItem{
+    .CountryListItem {
         width: 50%;
     }
 }
+
 @media (min-width: 700px) {
-    .CountryListItem{
+    .CountryListItem {
         width: 25%;
     }
 }

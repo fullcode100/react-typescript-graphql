@@ -10,11 +10,17 @@ import styles from './CountryPage.module.css';
 import { CountryInput } from '../components/countryInput/CountryInput';
 import { Country } from '../store/models/CountryModel';
 import { CountryList } from '../components/countryList/CountryList';
+import {
+  selectCountrySearchPageItemsClicked,
+  setCountryListItemClick,
+  unsetCountryListItemClick,
+} from '../store/reducers/guiSlice';
 
-export function CountryPage() {
+export function CountrySearchPage() {
   const searchString = useAppSelector(selectCountrySearchValue);
   const filteredCountries :Country[]|undefined = useAppSelector(getFilteredCountries);
   const fetchStatus = useAppSelector(selectFetchStatus);
+  const countryListItemsClicked = useAppSelector(selectCountrySearchPageItemsClicked);
   const dispatch = useAppDispatch();
 
   if (fetchStatus !== 'fetched') {
@@ -36,8 +42,17 @@ export function CountryPage() {
         // dispatch(setSearchValueManually(inputString));
       }, 500);
     }
-
-
+  };
+  const onCountryListItemClick = (country:Country) => {
+    console.info('CountrySearchPage -> onCountryInputChange:'
+      , '\ninputString:', country,
+    );
+    if(countryListItemsClicked[country.code]){
+      dispatch(unsetCountryListItemClick(country));
+    }
+    else{
+      dispatch(setCountryListItemClick(country));
+    }    // props.onCountryListItemLick(country);
   };
 
   console.info('CountryPage:'
@@ -47,7 +62,12 @@ export function CountryPage() {
   return (
     <div className="CountryPage">
       <CountryInput onInputChange={onCountryInputChange} inputValue={searchString}></CountryInput>
-      <CountryList onInputChange={onCountryInputChange} countries={filteredCountries}></CountryList>
+      <CountryList
+        onInputChange={onCountryInputChange}
+        countries={filteredCountries}
+        onCountryListItemClick={onCountryListItemClick}
+        itemsSelected={countryListItemsClicked}
+      ></CountryList>
     </div>
   );
 }
