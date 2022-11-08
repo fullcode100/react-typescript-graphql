@@ -22,3 +22,19 @@ export function fetchCountries()  {
   };
   return fetch(resourceBase, options).then((response)=> response.json());
 }
+
+export function fetchCountry(countryCode: string)  {
+  const resourceBase = 'https://countries.trevorblades.com';
+  const myHeaders = new Headers();
+   myHeaders.append('Content-Type', 'application/json');
+  const options: RequestInit = {
+    method: 'POST',
+    headers: myHeaders,
+    mode: 'cors',
+    cache: 'default',
+    body: JSON.stringify({
+      query: `{country(code: "${countryCode}"){name, code, capital, phone, continent{code}}}`,
+    }),
+  };
+  return fetch(resourceBase, options).then((response)=> response.json());
+}

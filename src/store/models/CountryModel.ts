@@ -6,14 +6,24 @@ export interface ICountry {
   code: string;
   capital: string;
   phone: string;
-  continent:{
+  continent: {
     code: string;
-  }
+  };
 }
-export interface FetchCountriesAPIResult{
-     continents:Continent[],
-    countries: ICountry[]
- }
-export interface FetchCountriesAPIResponse{
-  data:FetchCountriesAPIResult
+
+export interface FetchCountriesAPIResult {
+  continents: Continent[],
+  countries: ICountry[]
+}
+
+export interface FetchCountriesAPIResponse {
+  data: FetchCountriesAPIResult;
+}
+
+export interface FetchCountryAPIResult {
+  country: ICountry;
+}
+
+export interface FetchCountryAPIResponse {
+  data: FetchCountryAPIResult;
 }

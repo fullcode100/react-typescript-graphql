@@ -1,0 +1,10 @@
+
+.Reset {
+    background-color: #f8eddc;
+    padding: 5px 10px;
+    flex-direction: row;
+    display: inline-flex;
+    box-sizing: border-box;
+    border: 1px solid #999;
+    border-radius: 3px;
+}

@@ -4,8 +4,8 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import {
   setSearchValue,
-  searchCountriesAsync,
-  selectCountrySearchValue, setSearchValueManually, getFilteredCountries, selectFetchStatus,
+  fetchAllCountriesAsync,
+  selectCountrySearchValue, setSearchValueManually, getFilteredCountries, selectFetchAllCountriesStatus,
 } from '../../store/reducers/countrySlice';
 import styles from './CountryPage.module.css';
 import { CountryInput } from '../../components/countryInput/CountryInput';
@@ -20,13 +20,15 @@ import {
 export function CountrySearchPage() {
   const searchString = useAppSelector(selectCountrySearchValue);
   const filteredCountries: ICountry[] | undefined = useAppSelector(getFilteredCountries);
-  const fetchStatus = useAppSelector(selectFetchStatus);
+  const fetchStatus = useAppSelector(selectFetchAllCountriesStatus);
   const countryListItemsClicked = useAppSelector(selectCountrySearchPageItemsClicked);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   if (fetchStatus !== 'fetched') {
-    dispatch(searchCountriesAsync()); // Fetch countries on initial load
+    if (fetchStatus !== 'loading') {
+      dispatch(fetchAllCountriesAsync()); // Fetch countries on initial load
+    }
   }
   const [countrySearchValue, setCountrySearchValue] = useState('');
 
@@ -37,13 +39,13 @@ export function CountrySearchPage() {
       , '\ninputString:', inputString,
     );
     dispatch(setSearchValueManually(inputString));
-    if (inputTimeout) {
-      clearTimeout(inputTimeout);
-    } else {
-      inputTimeout = setTimeout(() => {
-        // dispatch(setSearchValueManually(inputString));
-      }, 500);
-    }
+    // if (inputTimeout) {
+    //   clearTimeout(inputTimeout);
+    // } else {
+    //   inputTimeout = setTimeout(() => {
+    //     // dispatch(setSearchValueManually(inputString));
+    //   }, 500);
+    // }
   };
   const onCountryListItemClick = (country: ICountry) => {
     console.info('CountrySearchPage -> onCountryInputChange:'
