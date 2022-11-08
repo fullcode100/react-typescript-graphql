@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import {
-   fetchAllCountriesAsync,
+  fetchAllCountriesAsync,
   selectCountrySearchValue,
   setSearchValueManually,
   getFilteredCountries,
@@ -31,7 +31,7 @@ export function CountrySearchPage() {
   const navigate = useNavigate();
 
   if (fetchStatus !== 'fetched') {
-    if (fetchStatus !== 'loading') {
+    if (fetchStatus !== 'loading') {                                     
       dispatch(fetchAllCountriesAsync()); // Fetch countries on initial load
     }
   }
@@ -46,7 +46,7 @@ export function CountrySearchPage() {
     }
 
   };
-  const onResetButtonClick = () => { 
+  const onResetButtonClick = () => {
     dispatch(resetCountryState());
     dispatch(resetGUIState());
 

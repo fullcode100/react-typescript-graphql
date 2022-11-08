@@ -142,7 +142,7 @@ export const setSearchValueManually =
     (dispatch, getState) => {
        dispatch(setSearchValue(searchString));
     };
-export const setURLCodeManually =
+export const setURLCodeManually =                      
   (countryCode: string): AppThunk =>
     (dispatch, getState) => {
        dispatch(setCountryCodeFromURL(countryCode));
