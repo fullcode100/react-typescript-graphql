@@ -1,11 +1,13 @@
 // A mock function to mimic making an async request for data
+import { FetchCountriesAPIResponse } from '../models/CountryModel';
+
 export function fetchSearchString(searchString = 'Can') {
   return new Promise<{ data: string }>((resolve) =>
     setTimeout(() => resolve({data: searchString}), 500),
   );
 }
 
-export function fetchCountries() {
+export function fetchCountries()  {
   const resourceBase = 'https://countries.trevorblades.com';
   const myHeaders = new Headers();
    myHeaders.append('Content-Type', 'application/json');
@@ -15,8 +17,8 @@ export function fetchCountries() {
     mode: 'cors',
     cache: 'default',
     body: JSON.stringify({
-      query: `{continents{code,name}}`,
+      query: `{continents{code,name}, countries{name, code, capital, phone, continent{code}}}`,
     }),
   };
-  return fetch(resourceBase, options);
+  return fetch(resourceBase, options).then((response)=> response.json());
 }

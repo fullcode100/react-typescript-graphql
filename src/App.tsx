@@ -5,6 +5,7 @@ import { Intro } from './components/intro/Intro';
 import { Route, Routes } from "react-router-dom"
 import './App.css';
 import { CountryInput } from './components/countryInput/CountryInput';
+import { CountryPage } from './pages/CountryPage';
 
 function App() {
   return (
@@ -13,8 +14,9 @@ function App() {
       <section className="App-mainContent">
         {/*<Intro  />*/}
         <Routes>
-          <Route path="/" element={<Intro />} />
-          <Route path="/country" element={<CountryInput />} />
+          <Route path="/" element={<CountryPage />} />
+          <Route path="/intro" element={<Intro />} />
+          <Route path="/country" element={<CountryPage />} />
         </Routes>
       </section>
     </div>

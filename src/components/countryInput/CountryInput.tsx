@@ -1,38 +1,36 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import {
+ import styles from './CountryInput.module.css';
 
-  setSearchValue,
-  searchAsync,
-  selectCountrySearchValue, setSearchValueManually,
-} from '../../store/reducers/countrySlice';
-import styles from './CountryInput.module.css';
+export interface CountryInputProps {
+  onInputChange: (inputString: string) => void;
+  inputValue?: string;
+}
 
-export function CountryInput() {
-  const searchString = useAppSelector(selectCountrySearchValue);
-  const dispatch = useAppDispatch();
-  const [countrySearchValue, setCountrySearchValue] = useState('');
+export interface CountryInputState {
+  inputValue?: string;
+}
 
-  const incrementValue = countrySearchValue || searchString;
-
+export function CountryInput(props: CountryInputProps) {
+    const state: CountryInputState = Object.assign({}, {
+    inputValue: props.inputValue || '',
+  });
+ 
   return (
     <div className="CountryInput">
       <div className={styles.row}>
         <input
           className={styles.textbox}
           aria-label="Search for country"
-          value={searchString}
+          placeholder="Search for country"
+          value={state.inputValue || ''}
           onChange={(e) => {
-            console.info('e.target.value:', e.target.value,
-              '\ne.target:', e.target,
-              '\nsearchString:', searchString
-            );
-            dispatch(setSearchValueManually(e.target.value));
-            dispatch(searchAsync('' ));
+            console.info('e.target.value:', e.target.value);
+            props.onInputChange(e.target.value);
+            // dispatch(setSearchValueManually(e.target.value));
             // setCountrySearchValue(e.target.value);
           }}
-        /> 
+        />
       </div>
 
     </div>
