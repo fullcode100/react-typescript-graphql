@@ -1,10 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import { Intro } from './features/intro/Intro';
+import { Counter } from './components/counter/Counter';
+import { Intro } from './components/intro/Intro';
 import { Route, Routes } from "react-router-dom"
 import './App.css';
-import { CountryInput } from './features/countryInput/CountryInput';
+import { CountryInput } from './components/countryInput/CountryInput';
 
 function App() {
   return (

@@ -1,13 +1,16 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../../store/store';
-import { fetchSearchString } from './countryInputAPI';
+import { fetchCountries, fetchSearchString } from '../services/countryService';
 
-export interface CountryInputState {
+export interface Country{
+  
+}
+export interface CountryState {
   value: string;
   status: 'idle' | 'loading' | 'failed';
 }
 
-const initialState: CountryInputState = {
+const initialState: CountryState = {
   value: '',
   status: 'idle',
 };
@@ -20,13 +23,18 @@ const initialState: CountryInputState = {
 export const searchAsync = createAsyncThunk(
   'countryInput/fetchSearchString',
   async (searchString: string) => {
-    const response = await fetchSearchString(searchString);
+    // const response = await fetchSearchString(searchString);
+    const response = await fetchCountries().then((something) => {
+      console.info('countryInputSlice -> reducers -> searchAsync -> response: ', response);
+    });
     // The value we return becomes the `fulfilled` action payload
-    return response.data;
+    console.info('countryInputSlice -> reducers -> searchAsync: ',
+      '\nresponse: ', response);
+    return response;
   },
 );
 
-export const countryInputSlice = createSlice({
+export const countrySlice = createSlice({
   name: 'countryInput',
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
@@ -56,7 +64,7 @@ export const countryInputSlice = createSlice({
   },
 });
 
-export const {setSearchValue} = countryInputSlice.actions;
+export const {setSearchValue} = countrySlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
@@ -76,4 +84,4 @@ export const setSearchValueManually =
       dispatch(setSearchValue(searchString));
     };
 
-export default countryInputSlice.reducer;
+export default countrySlice.reducer;

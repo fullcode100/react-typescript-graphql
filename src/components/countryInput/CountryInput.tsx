@@ -6,7 +6,7 @@ import {
   setSearchValue,
   searchAsync,
   selectCountrySearchValue, setSearchValueManually,
-} from './countryInputSlice';
+} from '../../store/reducers/countrySlice';
 import styles from './CountryInput.module.css';
 
 export function CountryInput() {
@@ -18,24 +18,6 @@ export function CountryInput() {
 
   return (
     <div className="CountryInput">
-      {/*<div className={styles.row}>*/}
-      {/*  <button*/}
-      {/*    className={styles.button}*/}
-      {/*    aria-label="Decrement value"*/}
-      {/*    onClick={() => dispatch(decrement())}*/}
-      {/*  >*/}
-      {/*    -*/}
-      {/*  </button>*/}
-      {/*  <span className={styles.value}>{count}</span>*/}
-      {/*  <button*/}
-      {/*    className={styles.button}*/}
-      {/*    aria-label="Increment value"*/}
-      {/*    onClick={() => dispatch(increment())}*/}
-      {/*  >*/}
-      {/*    +*/}
-      {/*  </button>*/}
-      {/*</div>*/}
-
       <div className={styles.row}>
         <input
           className={styles.textbox}
@@ -47,21 +29,10 @@ export function CountryInput() {
               '\nsearchString:', searchString
             );
             dispatch(setSearchValueManually(e.target.value));
+            dispatch(searchAsync('' ));
             // setCountrySearchValue(e.target.value);
           }}
-        />
-        {/*<button*/}
-        {/*  className={styles.button}*/}
-        {/*  onClick={() => dispatch(setSearchValue(incrementValue))}*/}
-        {/*>*/}
-        {/*  Add Amount*/}
-        {/*</button>*/}
-        {/*<button*/}
-        {/*  className={styles.asyncButton}*/}
-        {/*  onClick={() => dispatch(searchAsync(incrementValue))}*/}
-        {/*>*/}
-        {/*  Add Async*/}
-        {/*</button> */}
+        /> 
       </div>
 
     </div>
