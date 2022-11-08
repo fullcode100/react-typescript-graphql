@@ -1,6 +1,15 @@
-.inputContainer {
+.CountryList{
+         flex-direction: row;
+    max-width: 100%;
+    flex-wrap: wrap;
 }
-
-.listItem {
-    background-color: #f8eddc;
+@media (max-width: 700px) {
+    .CountryListItem{
+        width: 50%;
+    }
+}
+@media (min-width: 700px) {
+    .CountryListItem{
+        width: 25%;
+    }
 }

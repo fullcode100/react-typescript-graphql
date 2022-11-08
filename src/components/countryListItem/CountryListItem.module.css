@@ -1,21 +1,26 @@
- 
+
 .CountryListItem {
     background-color: #f8eddc;
     padding: 5px 10px;
-    flex-direction: row;
+    flex-direction: column;
+    display: inline-flex;
+    box-sizing: border-box;
 }
-.CountryListItem  > div{
+
+.CountryListItem > div {
     flex-direction: row;
     margin-right: 20px;
-
 }
-.label{
+
+.label {
     font-weight: bold;
     margin-right: 10px;
 }
-.code{
+
+.code {
 
 }
-.name{
 
-}                                   
+.name {
+
+}

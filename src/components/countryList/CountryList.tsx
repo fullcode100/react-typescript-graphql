@@ -17,17 +17,17 @@ export interface CountryListProps extends CountryListState {
 export function CountryList(props: CountryListProps) {
   const state: CountryListState = Object.assign({}, {
     countries: props.countries,
-    maxItems: props.maxItems || 20
+    maxItems: props.maxItems || 20,
   });
   const countryElements = state.countries?.map((country, index) => {
-    if(index < state.maxItems!){
-      return (
-        <CountryListItem country={country} key={country.code}></CountryListItem>
-      );
-    }
-  });
+    return (
+      <CountryListItem country={country} key={country.code} ></CountryListItem>
+    );
+  }).filter((countryListItem, index) => {
+       return index < state.maxItems!;
+   });
   return (
-    <div className="CountryList">
+    <div className={ `CountryList ${styles.CountryList} ` }>
       {countryElements}
     </div>
   );

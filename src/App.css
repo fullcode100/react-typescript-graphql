@@ -38,6 +38,7 @@
 .App-link {
   color: rgb(112, 76, 182);
 }
+
 @keyframes App-logo-float {
   0% {
     transform: translateY(0);
@@ -47,5 +48,15 @@
   }
   100% {
     transform: translateY(0px);
+  }
+}
+@media (max-width: 700px) {
+  .CountryListItem{
+      width: 50%;
+  }
+}
+@media (min-width: 700px) {
+  .CountryListItem{
+      width: 25%;
   }
 }
