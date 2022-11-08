@@ -5,7 +5,8 @@ import { Intro } from './components/intro/Intro';
 import { Route, Routes } from "react-router-dom"
 import './App.css';
 import { CountryInput } from './components/countryInput/CountryInput';
-import { CountrySearchPage } from './pages/CountrySearchPage';
+import { CountrySearchPage } from './pages/CountrySearchPage/CountrySearchPage';
+import { CountryPage } from './pages/CountryPage/CountryPage';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<CountrySearchPage />} />
           <Route path="/intro" element={<Intro />} />
-          <Route path="/country" element={<CountrySearchPage />} />
+          <Route path="/country/:countryCode" element={<CountryPage />} />
         </Routes>
       </section>
     </div>

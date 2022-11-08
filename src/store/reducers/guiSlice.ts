@@ -1,14 +1,14 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../../store/store';
 import { fetchCountries, fetchSearchString } from '../services/countryService';
-import { Country, FetchCountriesAPIResponse, FetchCountriesAPIResult } from '../models/CountryModel';
+import { ICountry, FetchCountriesAPIResponse, FetchCountriesAPIResult } from '../models/CountryModel';
 import { Continent } from '../models/ContinentModel';
 
 export interface CountrySearchPageGUI {
   loading?: boolean;
   countryListItem: {
     clicked: {
-      [key: string]: Country;
+      [key: string]: ICountry;
     }
   };
 }
@@ -55,14 +55,14 @@ export const guiSlice = createSlice({
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
-    setCountryListItemClick: (state, action: PayloadAction<Country>) => {
+    setCountryListItemClick: (state, action: PayloadAction<ICountry>) => {
       state = {...state};
       state.countrySearchPage.countryListItem.clicked[action.payload.code] = action.payload;
       console.info('guiSlice -> reducers -> setCountryListItemClick: ',
         '\naction: ', action,
         '\nstate: ', state);
     },
-    unsetCountryListItemClick: (state, action: PayloadAction<Country>) => {
+    unsetCountryListItemClick: (state, action: PayloadAction<ICountry>) => {
       state = {...state};
       delete (state.countrySearchPage.countryListItem.clicked[action.payload.code]);
       // state.countrySearchPage.countryListItem.clicked[action.payload.code] =  action.payload;

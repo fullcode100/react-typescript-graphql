@@ -1,7 +1,7 @@
 // https://countries.trevorblades.com/
 import { Continent } from './ContinentModel';
 
-export interface Country{
+export interface ICountry {
   name: string;
   code: string;
   capital: string;
@@ -12,7 +12,7 @@ export interface Country{
 }
 export interface FetchCountriesAPIResult{
      continents:Continent[],
-    countries: Country[]
+    countries: ICountry[]
  }
 export interface FetchCountriesAPIResponse{
   data:FetchCountriesAPIResult

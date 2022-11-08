@@ -1,12 +1,12 @@
 import React from 'react';
 
 import styles from './CountryListItem.module.css';
-import { Country } from '../../store/models/CountryModel';
+import { ICountry } from '../../store/models/CountryModel';
 
 export interface CountryListItemProps {
-  country: Country;
-  onCountryListItemClick: (country: Country) => void;
-  onViewCountryButtonClick: (country: Country) => void;
+  country: ICountry;
+  onCountryListItemClick: (country: ICountry) => void;
+  onViewCountryButtonClick: (country: ICountry) => void;
   isSelected?: boolean;
 }
 
