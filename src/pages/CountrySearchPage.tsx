@@ -54,6 +54,17 @@ export function CountrySearchPage() {
       dispatch(setCountryListItemClick(country));
     }    // props.onCountryListItemLick(country);
   };
+  const onViewCountryButtonClick = (country:Country) => {
+    console.info('CountrySearchPage -> onViewCountryButtonClick:'
+      , '\ninputString:', country,
+    );
+    // if(countryListItemsClicked[country.code]){
+    //   dispatch(unsetCountryListItemClick(country));
+    // }
+    // else{
+    //   dispatch(setCountryListItemClick(country));
+    // }    // props.onCountryListItemLick(country);
+  };
 
   console.info('CountryPage:'
     , '\nsearchString: ', searchString
@@ -66,6 +77,7 @@ export function CountrySearchPage() {
         onInputChange={onCountryInputChange}
         countries={filteredCountries}
         onCountryListItemClick={onCountryListItemClick}
+        onViewCountryButtonClick={onViewCountryButtonClick}
         itemsSelected={countryListItemsClicked}
       ></CountryList>
     </div>

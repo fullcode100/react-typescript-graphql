@@ -2,23 +2,25 @@
 .CountryListItem {
     background-color: #f8eddc;
     padding: 5px 10px;
-    flex-direction: column;
+    flex-direction: row;
     display: inline-flex;
     box-sizing: border-box;
     border: 1px solid #999;
     border-radius: 3px;
-    cursor: pointer;
 }
 
 .isSelected {
     background-color: rgba(63, 44, 13, 0.5);
 }
 
-.CountryListItem > div {
-    flex-direction: row;
+.data{                                     
+    /*flex-direction: column;*/
+    flex: 1 0 auto;
     margin-right: 20px;
 }
-
+.data > div {
+    flex-direction: row;
+}
 .label {
     font-weight: bold;
     margin-right: 10px;
@@ -29,5 +31,16 @@
 }
 
 .name {
+
+}
+.action{
+    width: 15%;
+    max-width: 80px;
+    justify-content: right;
+
+}
+.action button{
+    height: 100%;
+    cursor: pointer;
 
 }

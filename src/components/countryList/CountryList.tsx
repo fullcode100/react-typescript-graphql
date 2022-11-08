@@ -3,7 +3,6 @@ import React from 'react';
 import styles from './CountryList.module.css';
 import { Country } from '../../store/models/CountryModel';
 import { CountryListItem } from '../countryListItem/CountryListItem';
-import { setSearchValueManually } from '../../store/reducers/countrySlice';
 
 export interface CountryListState {
   countries?: Country[];
@@ -13,6 +12,7 @@ export interface CountryListState {
 export interface CountryListProps extends CountryListState {
   onInputChange: (inputString: string) => void;
   onCountryListItemClick: (country: Country) => void;
+  onViewCountryButtonClick: (country: Country) => void;
   itemsSelected: {
     [key: string]: Country;
   };
@@ -25,16 +25,18 @@ export function CountryList(props: CountryListProps) {
     maxItems: props.maxItems || 20,
   });
   const onCountryListItemClick = (country: Country) => {
-    console.info('CountryList -> onCountryInputChange:'
-      , '\ninputString:', country,
-    );
     props.onCountryListItemClick(country);
   };
+  const onViewCountryButtonClick = (country: Country) => {
+    props.onViewCountryButtonClick(country);
+  };
+
   const countryElements = state.countries?.map((country, index) => {
     const isSelected = !!((props.itemsSelected) && (props.itemsSelected[country.code]));
     return (
       <CountryListItem country={country}
                        onCountryListItemClick={onCountryListItemClick}
+                       onViewCountryButtonClick={onViewCountryButtonClick}
                        key={country.code}
                        isSelected={isSelected}/>
     );
