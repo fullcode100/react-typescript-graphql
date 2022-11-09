@@ -13,8 +13,12 @@ export interface CountryListItemProps {
 export function CountryListItem(props: CountryListItemProps) {
   const isSelectedClass = (props.isSelected) ? styles.isSelected : '';
   return (
-    <div className={`CountryListItem  ${styles.CountryListItem} ${isSelectedClass} `} onClick={() => {
-      props.onCountryListItemClick(props.country);
+    <div className={`CountryListItem  ${styles.CountryListItem} ${isSelectedClass} `} onClick={(event) => {
+      const targetIsButton =  ((event.target as any).tagName?.toLowerCase()) === 'button';
+
+      // if (!targetIsButton) {
+        props.onCountryListItemClick(props.country);
+      // }
     }}>
       <div className={styles.data}>
         <div className={styles.code}>
@@ -26,8 +30,8 @@ export function CountryListItem(props: CountryListItemProps) {
       </div>
       <div className={styles.action}>
         <button onClick={() => {
-          console.info('onButtonClick');
           props.onViewCountryButtonClick(props.country);
+          return false;
         }}>View
         </button>
       </div>

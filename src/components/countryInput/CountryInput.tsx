@@ -24,9 +24,9 @@ export function CountryInput(props: CountryInputProps) {
           aria-label="Search for country"
           placeholder="Search for country"
           value={state.inputValue || ''}
+          autoFocus={true}
           onChange={(e) => {
-            console.info('e.target.value:', e.target.value);
-            props.onInputChange(e.target.value); 
+             props.onInputChange(e.target.value);
           }}
         />
       </div>

@@ -31,7 +31,7 @@ export function CountrySearchPage() {
   const navigate = useNavigate();
 
   if (fetchStatus !== 'fetched') {
-    if (fetchStatus !== 'loading') {                                     
+    if (fetchStatus !== 'loading') {
       dispatch(fetchAllCountriesAsync()); // Fetch countries on initial load
     }
   }
@@ -53,7 +53,6 @@ export function CountrySearchPage() {
   };
   const onViewCountryButtonClick = (country: ICountry) => {
     navigate(`/country/${country.code}`);
-    return false;
   };
   return (
     <div className={`CountrySearchPage  ${styles.CountrySearchPage}   `}>
